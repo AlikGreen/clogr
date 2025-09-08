@@ -15,6 +15,9 @@ file(GLOB_RECURSE
 message(STATUS "Found source files: ${SRC_FILES}")
 
 
-add_library(neonLog STATIC ${SRC_FILES})
+add_library(neonLog STATIC ${SRC_FILES}
+        include/neonLog/neonLog.h)
 
+target_include_directories(neonLog PRIVATE src/)
+target_include_directories(neonLog PUBLIC include/)
 target_link_libraries(neonLog PRIVATE spdlog)
