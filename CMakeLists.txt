@@ -3,6 +3,8 @@ project(neonLog)
 
 set(CMAKE_CXX_STANDARD 23)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/spdlog)
+
 file(GLOB_RECURSE
         SRC_FILES
         CONFIGURE_DEPENDS
@@ -10,4 +12,9 @@ file(GLOB_RECURSE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
 )
 
+message(STATUS "Found source files: ${SRC_FILES}")
+
+
 add_library(neonLog STATIC ${SRC_FILES})
+
+target_link_libraries(neonLog PRIVATE spdlog)
