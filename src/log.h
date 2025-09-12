@@ -10,7 +10,7 @@ namespace Neon::Log
     {
         const auto logger = spdlog::stdout_color_mt(logger_name);
         spdlog::set_default_logger(logger);
-        spdlog::set_pattern("[%H:%M:%S] [%n] [%^%L%$] [thread %t] %v");
+        spdlog::set_pattern("[%H:%M:%S] [thread %t] [%n] [%^%L%$] %v");
     }
 
     inline void setCustomPattern(const std::string & pattern)
