@@ -19,4 +19,4 @@ add_library(neonLog STATIC ${SRC_FILES}
         include/neonLog/neonLog.h)
 
 target_include_directories(neonLog PUBLIC include/ src/)
-target_link_libraries(neonLog PRIVATE spdlog)
+target_link_libraries(neonLog PUBLIC spdlog)
