@@ -27,4 +27,18 @@ namespace Neon
         }
     }
 
+    static int levelToInt(const Level level)
+    {
+        switch (level)
+        {
+            case Trace: return 0; break;
+            case Info: return 1; break;
+            case Warn: return 2; break;
+            case Error: return 3; break;
+            case Fatal: return 4; break;
+            case None: return 5; break;
+            default: return 0;
+        }
+    }
+
 }
