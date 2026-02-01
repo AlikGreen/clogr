@@ -4,6 +4,7 @@ project(neonLog)
 set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/spdlog)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/cpptrace)
 
 file(GLOB_RECURSE
         SRC_FILES
@@ -18,5 +19,9 @@ message(STATUS "Found source files: ${SRC_FILES}")
 add_library(neonLog STATIC ${SRC_FILES}
         include/neonLog/neonLog.h)
 
-target_include_directories(neonLog PUBLIC include/ src/)
-target_link_libraries(neonLog PUBLIC spdlog)
+if(WIN32)
+    target_link_libraries(neonLog PUBLIC dbghelp)
+endif()
+
+target_include_directories(neonLog PUBLIC include/ src/ dependencies/backward)
+target_link_libraries(neonLog PUBLIC spdlog cpptrace::cpptrace)

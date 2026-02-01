@@ -1,8 +1,7 @@
 #include "fileStream.h"
 
 #include <filesystem>
-#include <bits/fs_path.h>
-#include <bits/random.h>
+#include <random>
 
 namespace Neon::Log
 {
@@ -17,9 +16,9 @@ namespace Neon::Log
         outfile = std::ofstream(fs::path(logDirectory) / fs::path(fileName));
     }
 
-    void FileStream::handle(const std::string msg)
+    void FileStream::handle(const std::string formattedMsg, std::string rawMsg, Level level)
     {
-        outfile << msg << "\n";
+        outfile << formattedMsg << "\n";
 
         const auto endTime = std::chrono::high_resolution_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();

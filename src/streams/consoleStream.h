@@ -6,8 +6,8 @@ namespace Neon::Log
 class ConsoleStream final : public Stream
 {
 public:
-    explicit ConsoleStream(const Level minLogLevel = Trace) : Stream(minLogLevel) {  }
+    explicit ConsoleStream(const Level minLogLevel = Level::Trace) : Stream(minLogLevel) {  }
 
-    void handle(std::string msg) override;
+    void handle(std::string formattedMsg, std::string rawMsg, Level level) override;
 };
 }

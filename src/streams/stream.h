@@ -11,14 +11,14 @@ public:
     virtual ~Stream() = default;
     explicit Stream(const Level minLogLevel) : minLogLevel(minLogLevel) { }
 
-    virtual void handle(std::string msg) = 0;
+    virtual void handle(std::string formattedMsg, std::string rawMsg, Level level) = 0;
     virtual void close() {  };
 
-    Level getMinLogLevel() const
+    [[nodiscard]] Level getMinLogLevel() const
     {
         return minLogLevel;
     }
 private:
-    Level minLogLevel = Trace;
+    Level minLogLevel = Level::Trace;
 };
 }

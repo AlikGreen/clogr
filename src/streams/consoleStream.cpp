@@ -4,8 +4,8 @@
 
 namespace Neon
 {
-    void Log::ConsoleStream::handle(const std::string msg)
+    void Log::ConsoleStream::handle(const std::string formattedMsg, const std::string rawMsg, Level level)
     {
-        std::cout << msg << "\n";
+        std::cout << formattedMsg << "\n";
     }
 }
