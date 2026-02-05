@@ -1,6 +1,12 @@
-[submodule "dependencies/spdlog"]
-	path = dependencies/spdlog
-	url = https://github.com/gabime/spdlog.git
 [submodule "dependencies/cpptrace"]
 	path = dependencies/cpptrace
 	url = https://github.com/jeremy-rifkin/cpptrace.git
+[submodule "dependencies/catch2"]
+	path = dependencies/catch2
+	url = https://github.com/catchorg/Catch2.git
+[submodule "dependencies/fmtlib"]
+	path = dependencies/fmtlib
+	url = https://github.com/fmtlib/fmt.git
+[submodule "dependencies/neoncore"]
+	path = dependencies/neoncore
+	url = https://github.com/AlikGreen/NeonCore.git

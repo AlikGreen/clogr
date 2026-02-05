@@ -2,7 +2,7 @@
 #include "level.h"
 #include "spdlog/sinks/base_sink.h"
 
-namespace Neon::Log
+namespace clogr
 {
     class CallbackSink final : public spdlog::sinks::base_sink<std::mutex>
     {

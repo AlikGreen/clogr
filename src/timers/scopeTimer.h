@@ -5,7 +5,7 @@
 
 #include "log.h"
 
-namespace Neon::Debug
+namespace clogr
 {
     template <typename DurationType = std::chrono::microseconds>
     class ScopeTimer

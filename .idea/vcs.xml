@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/dependencies/spdlog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dependencies/catch2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dependencies/cpptrace" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dependencies/fmtlib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dependencies/neoncore" vcs="Git" />
   </component>
 </project>
