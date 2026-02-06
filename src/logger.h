@@ -53,7 +53,7 @@ public:
 private:
     std::string m_name;
     std::vector<Neon::Box<Sink>> m_sinks{};
-    Pattern m_pattern;
-    Level m_minLogLevel;
+    Pattern m_pattern = Pattern("[{date} {time}] {color}[{l}]{reset} {v}");
+    Level m_minLogLevel = Level::Trace;
 };
 }

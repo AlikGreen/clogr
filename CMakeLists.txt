@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.29)
-project(neonLog)
+project(clogr)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -19,11 +19,13 @@ file(GLOB_RECURSE
 message(STATUS "Found source files: ${SRC_FILES}")
 
 
-add_library(neonLog STATIC ${SRC_FILES}
-        include/neonLog/neonLog.h)
+add_library(clogr STATIC ${SRC_FILES}
+        include/clogr/clogr.h)
 
-target_include_directories(neonLog PUBLIC include/ src/ dependencies/backward)
-target_link_libraries(neonLog PUBLIC fmt::fmt cpptrace::cpptrace neonCore)
+target_include_directories(clogr PUBLIC include/ src/ dependencies/backward)
+target_link_libraries(clogr PUBLIC fmt::fmt cpptrace::cpptrace neonCore)
+
+add_library(clogr::clogr ALIAS clogr)
 
 ### Testing
 
@@ -34,5 +36,5 @@ file(GLOB_RECURSE
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.h
 )
 
-add_executable(neonLog_Test ${TEST_SRC_FILES})
-target_link_libraries(neonLog_Test PUBLIC neonLog Catch2::Catch2WithMain)
+add_executable(clogr_tests ${TEST_SRC_FILES})
+target_link_libraries(clogr_tests PUBLIC clogr::clogr Catch2::Catch2WithMain)
