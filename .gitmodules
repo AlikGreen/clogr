@@ -7,6 +7,6 @@
 [submodule "dependencies/fmtlib"]
 	path = dependencies/fmtlib
 	url = https://github.com/fmtlib/fmt.git
-[submodule "dependencies/neoncore"]
-	path = dependencies/neoncore
-	url = https://github.com/AlikGreen/NeonCore.git
+[submodule "dependencies/grl"]
+	path = dependencies/grl
+	url = https://github.com/AlikGreen/grl.git

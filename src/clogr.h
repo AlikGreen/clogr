@@ -9,8 +9,8 @@
 
 namespace clogr
 {
-    Neon::Rc<Logger> getDefaultLogger();
-    void setDefaultLogger(const Neon::Rc<Logger>& logger);
+    grl::Rc<Logger> getDefaultLogger();
+    void setDefaultLogger(const grl::Rc<Logger>& logger);
 
     template <typename ... Args>
     void trace(fmt::format_string<Args...> fmt, Args &&... args)
@@ -61,17 +61,11 @@ namespace clogr
     )
     {
         if (condition)
-        {
             return;
-        }
 
-        fatal("============================================================");
-        fatal("ASSERTION FAILED");
-        fatal("Message: {}", fmt::format(fmtStr, std::forward<Args>(args)...));
-        fatal("============================================================");
+        const auto trace = cpptrace::generate_trace();
 
-        auto trace = cpptrace::generate_trace();
-        fatal("\nCall Stack:\n{}", formatStacktrace(trace));
+        fatal("[ASSERTION FAILED] {}\n{}\n", fmt::format(fmtStr, std::forward<Args>(args)...), formatStacktrace(trace));
 
         std::exit(-1);
     }

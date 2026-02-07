@@ -35,12 +35,12 @@ namespace clogr
         {
             switch (level)
             {
-                case Level::Trace: return "Trace";
-                case Level::Info:  return "Info";
-                case Level::Warn:  return "Warn";
-                case Level::Error: return "Error";
-                case Level::Fatal: return "Fatal";
-                case Level::None:  return "None";
+                case Level::Trace: return "TRACE";
+                case Level::Info:  return "INFO";
+                case Level::Warn:  return "WARNING";
+                case Level::Error: return "ERROR";
+                case Level::Fatal: return "FATAL";
+                case Level::None:  return "NONE";
                 default: return "This shouldn't happen";
             }
         }

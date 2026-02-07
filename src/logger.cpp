@@ -5,8 +5,11 @@
 namespace clogr
 {
     Logger::Logger(std::string name)
-        : m_name(std::move(name))
-    { }
+        : m_name(std::move(name)),
+    m_pattern("[{time}] {color}[{l}]{reset} {v}")
+    {
+
+    }
 
     void Logger::setPattern(const std::string_view pattern)
     {

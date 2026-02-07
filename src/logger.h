@@ -3,7 +3,7 @@
 #include <string_view>
 #include <utility>
 #include <vector>
-#include <neonCore/neonCore.h>
+#include <grl/grl.h>
 
 #include "pattern.h"
 #include "fmt/format.h"
@@ -47,13 +47,13 @@ public:
     T& addSink(Args&&... args)
     {
         T* sink = new T(std::forward<Args>(args)...);
-        m_sinks.push_back(Neon::Box<T>(sink));
+        m_sinks.push_back(grl::Box<T>(sink));
         return *sink;
     }
 private:
     std::string m_name;
-    std::vector<Neon::Box<Sink>> m_sinks{};
-    Pattern m_pattern = Pattern("[{date} {time}] {color}[{l}]{reset} {v}");
+    std::vector<grl::Box<Sink>> m_sinks{};
+    Pattern m_pattern;
     Level m_minLogLevel = Level::Trace;
 };
 }

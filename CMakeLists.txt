@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/fmtlib)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/cpptrace)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/catch2)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/neoncore)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/grl)
 
 
 file(GLOB_RECURSE
@@ -23,7 +23,7 @@ add_library(clogr STATIC ${SRC_FILES}
         include/clogr/clogr.h)
 
 target_include_directories(clogr PUBLIC include/ src/ dependencies/backward)
-target_link_libraries(clogr PUBLIC fmt::fmt cpptrace::cpptrace neonCore)
+target_link_libraries(clogr PUBLIC fmt::fmt cpptrace::cpptrace grl)
 
 add_library(clogr::clogr ALIAS clogr)
 

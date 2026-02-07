@@ -1,9 +1,7 @@
 #pragma once
 #include <chrono>
-#include <iostream> // Include for output
-#include <string>   // Include for std::string
 
-#include "log.h"
+#include <clogr.h>
 
 namespace clogr
 {
@@ -21,7 +19,7 @@ namespace clogr
             if(callback != nullptr)
                 callback(duration.count());
             else
-                Log::info("[{}] duration: {} {}", name, duration.count(), get_unit_name<DurationType>());
+                clogr::info("[{}] duration: {} {}", name, duration.count(), get_unit_name<DurationType>());
 
         }
 

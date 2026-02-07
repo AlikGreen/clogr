@@ -23,6 +23,7 @@ namespace clogr
         const auto ymd = std::chrono::year_month_day{ std::chrono::floor<std::chrono::days>(now) };
         const auto days = std::chrono::floor<std::chrono::days>(now); // The date
         const auto time_since_midnight = now - days;                  // The duration (time part)
+        const auto time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_since_midnight);
         const std::chrono::hh_mm_ss tod{ time_since_midnight };
 
         store.push_back(fmt::arg("v", message));
@@ -33,7 +34,7 @@ namespace clogr
 
         // Date/Time
         store.push_back(fmt::arg("date", ymd));
-        store.push_back(fmt::arg("time", fmt::format("{:%H:%M:%S}", time_since_midnight)));
+        store.push_back(fmt::arg("time", fmt::format("{:%H:%M:%S}", time_ms)));
         store.push_back(fmt::arg("Y", std::chrono::year_month_day{std::chrono::floor<std::chrono::days>(now)}));
         store.push_back(fmt::arg("m", ymd.month()));
         store.push_back(fmt::arg("d", ymd.day()));
@@ -43,7 +44,7 @@ namespace clogr
         store.push_back(fmt::arg("e", tod.subseconds().count()));
 
         const auto us = std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()) % 1000000;
-        store.push_back(fmt::arg("f", fmt::format("{:06}", us.count())));
+        store.push_back(fmt::arg("f", fmt::format("{:05}", us.count())));
         // Color support
         store.push_back(fmt::arg("color", level::toColor(level)));
         store.push_back(fmt::arg("reset", "\033[0m"));
