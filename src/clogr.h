@@ -69,4 +69,18 @@ namespace clogr
 
         std::exit(-1);
     }
+
+    template<typename... Args>
+    [[noreturn]] void abort
+    (
+        fmt::format_string<Args...> fmtStr,
+        Args&&... args
+    )
+    {
+        const auto trace = cpptrace::generate_trace();
+        fatal("[ABORTION] {}\n{}\n",
+              fmt::format(fmtStr, std::forward<Args>(args)...),
+              formatStacktrace(trace));
+        std::exit(-1);
+    }
 }

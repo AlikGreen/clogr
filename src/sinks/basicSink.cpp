@@ -6,7 +6,7 @@ namespace clogr
 {
     void BasicSink::handle(const std::string_view msg, const Level level, const std::string_view loggerName, const Pattern& pattern)
     {
-        std::cout << pattern.format(msg, loggerName, level) << "\n";
+        fmt::println(fmt::runtime(pattern.format(msg, loggerName, level)));
     }
 
     bool BasicSink::shouldLog(const Level level)
@@ -19,6 +19,6 @@ namespace clogr
 
     void BasicSink::flush()
     {
-        std::cout << std::flush;
+
     }
 }
