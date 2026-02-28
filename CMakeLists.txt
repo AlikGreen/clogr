@@ -3,6 +3,17 @@ project(clogr)
 
 set(CMAKE_CXX_STANDARD 23)
 
+
+# cpptrace requires ninja or visual studio
+if(NOT CMAKE_GENERATOR MATCHES "Ninja|Visual Studio")
+    message(FATAL_ERROR
+            "Generator '${CMAKE_GENERATOR}' is not supported. "
+            "Please use Ninja or Visual Studio 17.4+.\n"
+            "  CLion:   Settings > Build, Execution, Deployment > CMake > Generator\n"
+            "  Command line: cmake -G \"Ninja\" .."
+    )
+endif()
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/fmtlib)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/cpptrace)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/catch2)
