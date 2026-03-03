@@ -6,11 +6,16 @@
 #include <grl/grl.h>
 
 #include "pattern.h"
+#include "cpptrace/cpptrace.hpp"
 #include "fmt/format.h"
 #include "sinks/sink.h"
 
 namespace clogr
 {
+enum class AssertBehavior
+{
+    Abort, Throw, Ignore
+};
 
 class Logger
 {
@@ -27,6 +32,7 @@ public:
     void flush();
     void clearSinks();
     void setMinLevel(Level level);
+    void setEnsureBehaviour(AssertBehavior behavior);
 
     template<typename... Args>
     void log(const Level level, fmt::format_string<Args...> fmt, Args&&... args)
@@ -39,6 +45,27 @@ public:
 
             const std::string formatted = fmt::format(fmt, std::forward<Args>(args)...);
             sink->handle(formatted, level, m_name, m_pattern);
+        }
+    }
+
+    std::string formatStacktrace(const cpptrace::stacktrace& trace);
+
+    template<typename... Args>
+    void ensure(const bool condition, fmt::format_string<Args...> fmt, Args&&... args)
+    {
+        if(condition) return;
+
+        const auto trace = cpptrace::generate_trace();
+
+        switch (m_assertBehaviour)
+        {
+            case AssertBehavior::Abort:
+                this->log(Level::Fatal, "[ASSERTION] {}\n{}\n", fmt::format(fmt, std::forward<Args>(args)...), formatStacktrace(trace));
+                std::exit(-1);
+            case AssertBehavior::Throw:
+                throw std::runtime_error(fmt::format("Assertion failed: {}\n\n{}", fmt::format(fmt, std::forward<Args>(args)...), formatStacktrace(trace)));
+            default:
+                break;
         }
     }
 
@@ -55,5 +82,6 @@ private:
     std::vector<grl::Box<Sink>> m_sinks{};
     Pattern m_pattern;
     Level m_minLogLevel = Level::Trace;
+    AssertBehavior m_assertBehaviour = AssertBehavior::Abort;
 };
 }

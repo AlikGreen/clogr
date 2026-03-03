@@ -53,29 +53,16 @@ namespace clogr
     std::string formatStacktrace(const cpptrace::stacktrace& trace);
 
     template<typename... Args>
-    void ensure
-    (
-        const bool condition,
-        fmt::format_string<Args...> fmtStr,
-        Args&&... args
-    )
+    void ensure(const bool condition, fmt::format_string<Args...> fmt, Args&&... args)
     {
         if (condition)
             return;
 
-        const auto trace = cpptrace::generate_trace();
-
-        fatal("[ASSERTION FAILED] {}\n{}\n", fmt::format(fmtStr, std::forward<Args>(args)...), formatStacktrace(trace));
-
-        std::exit(-1);
+        getDefaultLogger()->ensure(condition, fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    [[noreturn]] void abort
-    (
-        fmt::format_string<Args...> fmtStr,
-        Args&&... args
-    )
+    [[noreturn]] void abort(fmt::format_string<Args...> fmtStr, Args&&... args)
     {
         const auto trace = cpptrace::generate_trace();
         fatal("[ABORTION] {}\n{}\n",
