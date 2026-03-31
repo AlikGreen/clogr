@@ -6,14 +6,14 @@
 #include <filesystem>
 #include <fstream>
 #include <mutex>
-#include <string>
+#include <utility>
 
 namespace clogr
 {
 class FileSink final : public Sink
 {
 public:
-    explicit FileSink(const std::filesystem::path filePath,
+    explicit FileSink(std::filesystem::path filePath,
         const Level minLogLevel = Level::Trace,
         const std::uintmax_t maxFileSize = 10 * 1024 * 1024,
         const unsigned maxFiles = 5)
@@ -25,9 +25,9 @@ public:
         openStream();
     }
 
-    ~FileSink()
+    ~FileSink() override
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        std::lock_guard lock(m_mutex);
         if (m_ofstream.is_open())
         {
             m_ofstream.flush();
@@ -43,7 +43,7 @@ private:
     void rotateIfNeeded();
     void rotate();
     void openStream();
-    std::uintmax_t currentFileSize() const;
+    [[nodiscard]] std::uintmax_t currentFileSize() const;
 
     std::filesystem::path m_filePath;
     Level m_minLogLevel;
@@ -53,3 +53,4 @@ private:
     std::ofstream m_ofstream;
     std::mutex m_mutex;
 };
+}

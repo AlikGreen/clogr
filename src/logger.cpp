@@ -18,7 +18,7 @@ namespace clogr
         m_pattern = Pattern(pattern);
     }
 
-    void Logger::flush()
+    void Logger::flush() const
     {
         for(const auto& sink : m_sinks)
         {

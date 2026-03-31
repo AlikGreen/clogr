@@ -29,7 +29,7 @@ public:
     Logger& operator=(Logger&&) noexcept = default;
 
     void setPattern(std::string_view pattern);
-    void flush();
+    void flush() const;
     void clearSinks();
     void setMinLevel(Level level);
     void setEnsureBehaviour(AssertBehavior behavior);

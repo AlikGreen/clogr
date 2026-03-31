@@ -9,37 +9,37 @@
 
 namespace clogr
 {
-    grl::Rc<Logger> getDefaultLogger();
+    grl::Rc<Logger> defaultLogger();
     void setDefaultLogger(const grl::Rc<Logger>& logger);
 
     template <typename ... Args>
     void trace(fmt::format_string<Args...> fmt, Args &&... args)
     {
-        getDefaultLogger()->log(Level::Trace, fmt, std::forward<Args>(args)...);
+        defaultLogger()->log(Level::Trace, fmt, std::forward<Args>(args)...);
     }
 
     template <typename ... Args>
     void info(fmt::format_string<Args...> fmt, Args &&... args)
     {
-        getDefaultLogger()->log(Level::Info, fmt, std::forward<Args>(args)...);
+        defaultLogger()->log(Level::Info, fmt, std::forward<Args>(args)...);
     }
 
     template <typename ... Args>
     void warn(fmt::format_string<Args...> fmt, Args &&... args)
     {
-        getDefaultLogger()->log(Level::Warn, fmt, std::forward<Args>(args)...);
+        defaultLogger()->log(Level::Warn, fmt, std::forward<Args>(args)...);
     }
 
     template <typename ... Args>
     void error(fmt::format_string<Args...> fmt, Args &&... args)
     {
-        getDefaultLogger()->log(Level::Error, fmt, std::forward<Args>(args)...);
+        defaultLogger()->log(Level::Error, fmt, std::forward<Args>(args)...);
     }
 
     template <typename ... Args>
     void fatal(fmt::format_string<Args...> fmt, Args &&... args)
     {
-        getDefaultLogger()->log(Level::Fatal, fmt, std::forward<Args>(args)...);
+        defaultLogger()->log(Level::Fatal, fmt, std::forward<Args>(args)...);
     }
 
     void trace(std::string_view msg);
@@ -58,7 +58,7 @@ namespace clogr
         if (condition)
             return;
 
-        getDefaultLogger()->ensure(condition, fmt, std::forward<Args>(args)...);
+        defaultLogger()->ensure(condition, fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>

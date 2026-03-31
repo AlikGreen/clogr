@@ -22,56 +22,56 @@ namespace clogr
 #endif
 
     bool initialized = false;
-    grl::Rc<Logger> defaultLogger  = nullptr;
+    grl::Rc<Logger> g_defaultLogger  = nullptr;
 
-    grl::Rc<Logger> getDefaultLogger()
+    grl::Rc<Logger> defaultLogger()
     {
         if(!initialized)
         {
             initTerminal();
 
-            defaultLogger = grl::makeRc<Logger>("Logger");
-            defaultLogger->addSink<BasicSink>();
+            g_defaultLogger = grl::makeRc<Logger>("Logger");
+            g_defaultLogger->addSink<BasicSink>();
 
             initialized = true;
         }
 
-        return defaultLogger;
+        return g_defaultLogger;
     }
 
     void setDefaultLogger(const grl::Rc<Logger> &logger)
     {
-        defaultLogger = logger;
+        g_defaultLogger = logger;
     }
 
     void trace(std::string_view msg)
     {
-        getDefaultLogger()->log(Level::Trace, "{}", msg);
+        defaultLogger()->log(Level::Trace, "{}", msg);
     }
 
     void info(std::string_view msg)
     {
-        getDefaultLogger()->log(Level::Info, "{}", msg);
+        defaultLogger()->log(Level::Info, "{}", msg);
     }
 
     void warn(std::string_view msg)
     {
-        getDefaultLogger()->log(Level::Warn, "{}", msg);
+        defaultLogger()->log(Level::Warn, "{}", msg);
     }
 
     void error(std::string_view msg)
     {
-        getDefaultLogger()->log(Level::Error, "{}", msg);
+        defaultLogger()->log(Level::Error, "{}", msg);
     }
 
     void fatal(std::string_view msg)
     {
-        getDefaultLogger()->log(Level::Fatal, "{}", msg);
+        defaultLogger()->log(Level::Fatal, "{}", msg);
     }
 
     void flush()
     {
-        getDefaultLogger()->flush();
+        defaultLogger()->flush();
     }
 
     namespace fs = std::filesystem;

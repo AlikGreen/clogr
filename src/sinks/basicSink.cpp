@@ -19,6 +19,6 @@ namespace clogr
 
     void BasicSink::flush()
     {
-
+        std::fflush(stdout);
     }
 }
