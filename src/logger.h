@@ -55,6 +55,7 @@ public:
     {
         if(condition) return;
 
+
         const auto trace = cpptrace::generate_trace();
 
         switch (m_assertBehaviour)
