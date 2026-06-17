@@ -1,5 +1,3 @@
 ## clogr
 
-clogr = Common Logger
-
 Need to document pattern formats
